@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
 
+
 const Signup = () => {
 
     const [formData, setFromData] = useState({});
