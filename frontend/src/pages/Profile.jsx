@@ -51,7 +51,7 @@ const Profile = () => {
             <h1 className='text-3xl font-semibold text-center my-7'>PROFILE</h1>
             <form action="" className='flex flex-col w-5/6 gap-7'>
                 <input type="file" ref={fileRef} className='hidden' accept='image/*' onChange={(e) => setImage(e.target.files[0])} />
-                <img src={currentUser.profilePicture} alt="profile"
+                <img src={formData.profilePicture || currentUser.profilePicture} alt="profile"
                     className='self-center rounded-full cursor-pointer object-cover' onClick={() => fileRef.current.click()} />
 
                 <p className='flex justify-center flex-row w-full'>
