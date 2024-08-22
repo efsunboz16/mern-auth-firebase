@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Signin = () => {
 
     const [formData, setFromData] = useState({});
-    const [loading, error] = useSelector((state) => state.user);
+    const { loading, error } = useSelector((state) => state.user);
     // const [error, setError] = useState(false);
     // const [loading, setLoading] = useState(false);
 
@@ -33,7 +33,6 @@ const Signin = () => {
                 body: JSON.stringify(formData),
             });
             const data = await res.json();
-            console.log(data);
             // setLoading(false);
             if (data.success === false) {
                 // setError(true);

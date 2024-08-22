@@ -1,5 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { Buffer } from 'buffer';
+import process from 'process';
+
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,5 +16,26 @@ export default defineConfig({
         secure: false,
       }
     }
+  },
+
+  build: {
+    rollupOptions: {
+      external: [
+        'crypto', 'buffer'
+      ],
+    },
+  },
+  define: {
+    'process.env': {},
+    'global': {},
+    'Buffer': Buffer,
+    'process': process,
+  },
+  resolve: {
+    alias: {
+      'buffer': 'buffer',
+      'process': 'process/browser',
+      'util': 'util',
+    },
   }
 })

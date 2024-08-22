@@ -1,5 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
-import { signin } from '../../../../backend/controllers/authcontroller';
+
 
 const initialState = {
     currentUser: null,
