@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import userRoutes from './routes/userroute.js'
 import authRoutes from './routes/authroute.js'
+import cookieParser from 'cookie-parser';
 
 // import { Buffer } from "buffer";
 // Global Buffer tanımlaması
@@ -38,6 +39,7 @@ const app = express();
 
 app.use(express.json())
 app.use(cors(corsOptions));
+app.use(cookieParser());
 
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoDB')
