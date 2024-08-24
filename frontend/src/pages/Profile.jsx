@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { getStorage, uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage'
 import { app } from '../../firebase';
-import { updateUserStart, updateUserFailure, updateUserSuccess } from '../redux/user/userslice';
+import { updateUserStart, updateUserFailure, updateUserSuccess, deleteUserStart, deleteUserFailure, deleteUserSuccess } from '../redux/user/userslice';
 
 
 const Profile = () => {
@@ -71,6 +71,23 @@ const Profile = () => {
         }
     }
 
+    const handleDeleteAccount = async () => {
+        try {
+            dispatch(deleteUserStart());
+            const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+                method: 'DELETE'
+            })
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(deleteUserFailure(data))
+                return
+            }
+            dispatch(deleteUserSuccess(data))
+        } catch (error) {
+            dispatch(deleteUserFailure(error))
+        }
+    }
+
     return (
         <div className='p-3 max-w-lg mx-auto flex flex-col items-center'>
             <h1 className='text-3xl font-semibold text-center my-7'>PROFILE</h1>
@@ -128,7 +145,7 @@ const Profile = () => {
                 </button>
             </form>
             <div className='w-full flex flex-row justify-between pl-10 pr-10 mt-3'>
-                <span>Delete Account</span>
+                <span className='cursor-pointer' onClick={handleDeleteAccount}>Delete Account</span>
                 <span>Signout</span>
             </div>
         </div>
